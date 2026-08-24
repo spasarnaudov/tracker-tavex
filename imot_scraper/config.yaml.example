@@ -1,0 +1,52 @@
+# Search filters, mapped directly onto imot.bg's own URL structure.
+#
+# Verified by direct browser inspection (search: 1-room apartments for sale
+# in Sofia, "В строеж"/under construction, max price 150000 EUR) — see
+# imot-bg-research.md. Values marked "unverified" below follow the same
+# pattern but were not independently checked; open imot.bg yourself and
+# compare the resulting URL before relying on them.
+search:
+  # prodazhbi = продажби (sales) [verified]. naemi = наеми (rentals) [unverified].
+  transaction_type: prodazhbi
+
+  # imot.bg location slug [verified for Sofia only]. For another city, run a
+  # search on the site and copy the slug from the resulting URL.
+  city_slug: grad-sofiya
+
+  # imot.bg has a single combined "room count / property type" filter — there
+  # is no separate "apartment" checkbox plus a separate room-count field.
+  # This becomes a URL path segment.
+  #   verified:   ednostaen (1-room), dvustaen (2-room)
+  #   unverified: tristaen (3-room), chetiristaen (4-room), mnogostaen (5+ room)
+  type_slug: ednostaen
+
+  # Free-text labels recorded on every listing collected in this run (imot.bg
+  # doesn't expose them structurally in the results list, so they come from
+  # what you searched for, not from parsing each card).
+  property_type: apartament
+  rooms: 1
+
+  # imot.bg's "година на строителство" filter is the query param
+  # ybuild_type. Verified value: "2~3~" = "В строеж" (under construction).
+  # Other codes are unverified — open the site's own filter checkboxes and
+  # read the resulting URL to find them. Leave blank to not filter by this.
+  year_built_filter: "2~3~"
+
+  # Any other imot.bg query params you find (e.g. price_max), passed through
+  # to the URL verbatim.
+  extra_query_params:
+    price_max: "150000"
+
+scraping:
+  delay_min_seconds: 2.0
+  delay_max_seconds: 3.5
+  timeout_seconds: 15
+  max_retries: 3
+  # Safety cap so a bug (or a change in imot.bg's pagination) can't loop
+  # forever; the real result count is usually far below this.
+  max_pages: 50
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+
+output:
+  format: json  # json or csv
+  path: listings.json
