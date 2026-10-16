@@ -173,8 +173,7 @@ if ! "$TAILSCALE_BIN" status &>/dev/null; then
     exit 1
 fi
 echo "Tailscale is connected."
-echo "MagicDNS name for this machine (needed for the Android/iOS clients'"
-echo "API_BASE_URL, see apps/android/docs/BUILD_VARIANTS.md):"
+echo "MagicDNS name for this machine:"
 "$TAILSCALE_BIN" status --self 2>/dev/null | head -1
 echo
 

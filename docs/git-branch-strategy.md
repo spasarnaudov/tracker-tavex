@@ -34,8 +34,6 @@ Prefix branch names by type:
 
 Prefix by domain when a change is scoped to one part of the project, combined with the type:
 
-- `android/feature/...`
-- `ios/fix/...`
 - `db/chore/...`
 - `scripts/chore/...`
 
