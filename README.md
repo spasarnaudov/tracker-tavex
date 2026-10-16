@@ -1,6 +1,6 @@
-# Portfolio Tracker
+# Tracker Tavex
 
-Portfolio Tracker is a personal project for tracking investment assets and their historical prices.
+Tracker Tavex is a personal project for tracking investment assets and their historical prices.
 
 ## Goals
 
@@ -20,7 +20,7 @@ Portfolio Tracker is a personal project for tracking investment assets and their
 ## Project Structure
 
 ```text
-portfolio-tracker/
+tracker-tavex/
 ├── apps/
 │   ├── flask/
 │   │   ├── app.py

@@ -6,12 +6,12 @@ Play Console application.
 
 | Variant | Purpose | Play track | API environment | Application ID | Version name |
 |---|---|---|---|---|---|
-| `alphaRelease` | Personal early testing | Internal testing | Development/internal | `io.github.spasarnaudov.portfoliotracker` | `0.1.0-alpha` |
-| `betaRelease` | External testers | Closed testing | Test | `io.github.spasarnaudov.portfoliotracker` | `0.1.0-beta` |
-| `productionRelease` | Official release | Production | Production | `io.github.spasarnaudov.portfoliotracker` | `0.1.0` |
-| `alphaDebug` | Local alpha development | Not uploaded | Local development | `io.github.spasarnaudov.portfoliotracker.alpha.debug` | `0.1.0-alpha-debug` |
-| `betaDebug` | Local beta development | Not uploaded | Test | `io.github.spasarnaudov.portfoliotracker.beta.debug` | `0.1.0-beta-debug` |
-| `productionDebug` | Local production checks | Not uploaded | Production | `io.github.spasarnaudov.portfoliotracker.production.debug` | `0.1.0-debug` |
+| `alphaRelease` | Personal early testing | Internal testing | Development/internal | `io.github.spasarnaudov.trackertavex` | `0.1.0-alpha` |
+| `betaRelease` | External testers | Closed testing | Test | `io.github.spasarnaudov.trackertavex` | `0.1.0-beta` |
+| `productionRelease` | Official release | Production | Production | `io.github.spasarnaudov.trackertavex` | `0.1.0` |
+| `alphaDebug` | Local alpha development | Not uploaded | Local development | `io.github.spasarnaudov.trackertavex.alpha.debug` | `0.1.0-alpha-debug` |
+| `betaDebug` | Local beta development | Not uploaded | Test | `io.github.spasarnaudov.trackertavex.beta.debug` | `0.1.0-beta-debug` |
+| `productionDebug` | Local production checks | Not uploaded | Production | `io.github.spasarnaudov.trackertavex.production.debug` | `0.1.0-debug` |
 
 Internal, Closed, and Production are tracks in the same Play application, not
 separate applications. Because the three release variants have the same application
@@ -74,7 +74,7 @@ are written below `app/build/outputs/bundle/<flavor>Release/`.
 
 Every `bundle<Flavor>Release` task also triggers a `rename<Flavor>Release` task
 (`app/build.gradle.kts`) that copies the `.aab` to
-`app/build/outputs/bundle-renamed/portfolio-tracker-android-<environment>-<versionName>.aab`
+`app/build/outputs/bundle-renamed/tracker-tavex-android-<environment>-<versionName>.aab`
 — use this copy for uploads; its name identifies the environment and version
 without opening the file.
 

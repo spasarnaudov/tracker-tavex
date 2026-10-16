@@ -12,7 +12,7 @@ covers, but does not currently exist in this checkout (see the note below).
 > REST/versioning conventions as the documented ones (see the retrospective note in the
 > project's own build log/PR description). Every such endpoint is marked **ASSUMED**
 > below and in a code comment at its declaration in
-> [`ApiService.kt`](../app/src/main/java/io/github/spasarnaudov/portfoliotracker/core/network/ApiService.kt).
+> [`ApiService.kt`](../app/src/main/java/io/github/spasarnaudov/trackertavex/core/network/ApiService.kt).
 > Re-verify each one against the real server (or a future `openapi.yaml`) before
 > shipping.
 

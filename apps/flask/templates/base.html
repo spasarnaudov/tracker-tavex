@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Portfolio Tracker{% endblock %}</title>
+    <title>{% block title %}Tracker Tavex{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 {% set password_messages = get_flashed_messages(with_categories=true) %}
@@ -17,7 +17,7 @@
 {% endfor %}
 <body class="{% block body_class %}{% endblock %}">
     <header class="site-header">
-        <h1 class="site-title">Portfolio Tracker</h1>
+        <h1 class="site-title">Tracker Tavex</h1>
 
         {% if current_user %}
             <div class="header-actions">

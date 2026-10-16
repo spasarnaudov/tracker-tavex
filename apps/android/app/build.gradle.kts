@@ -9,13 +9,13 @@ plugins {
 }
 
 android {
-    namespace = "io.github.spasarnaudov.portfoliotracker"
+    namespace = "io.github.spasarnaudov.trackertavex"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "io.github.spasarnaudov.portfoliotracker"
+        applicationId = "io.github.spasarnaudov.trackertavex"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -96,7 +96,7 @@ androidComponents {
             description = "Copies the $environment/${variant.buildType} .aab with the app name, environment, and version name in the file name"
             from(variant.artifacts.get(SingleArtifact.BUNDLE))
             into(layout.buildDirectory.dir("outputs/bundle-renamed"))
-            rename { "portfolio-tracker-android-$environment-$versionName.aab" }
+            rename { "tracker-tavex-android-$environment-$versionName.aab" }
         }
 
         tasks.matching { it.name == "bundle$variantNameCapitalized" }.configureEach {

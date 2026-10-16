@@ -22,7 +22,7 @@ usage() {
     echo "  $0 [-y] /path/to/backup.dump"
     echo
     echo "Example:"
-    echo "  $0 backups/database/portfolio_tracker_YYYY-MM-DD_HH-MM-SS.dump"
+    echo "  $0 backups/database/tracker_tavex_YYYY-MM-DD_HH-MM-SS.dump"
     echo
     echo "  -y    Skip the confirmation prompt (for scripted/cron use)."
     echo

@@ -1,6 +1,6 @@
-# Portfolio Tracker — iOS
+# Tracker Tavex — iOS
 
-A native iOS client for the Portfolio Tracker `/api/v1` REST API, built with Swift and
+A native iOS client for the Tracker Tavex `/api/v1` REST API, built with Swift and
 SwiftUI. It now covers close to the same feature set as the
 [Android client](../android/README.md): login/register, an editable portfolio,
 per-asset and portfolio-value price charts, account management, and an admin panel —
@@ -23,8 +23,8 @@ so they match the actual contract, not an assumption.
 ## Project structure
 
 ```text
-PortfolioTracker/
-├── PortfolioTrackerApp.swift       # App entry point
+TrackerTavex/
+├── TrackerTavexApp.swift       # App entry point
 ├── RootView.swift                  # Checking / Login / MainTabView by session state
 ├── MainTabView.swift                # Tabs after login (role-aware — see below)
 ├── Info.plist                      # Includes the ATS exception for the Tailscale host
@@ -71,14 +71,14 @@ since only debug builds are needed for now:
 
 | Configuration | Bundle identifier | `API_BASE_URL` | Display name |
 |---|---|---|---|
-| Alpha Debug | `io.github.spasarnaudov.portfoliotracker.alpha.debug` | `…:5002/api/v1/` | Portfolio Tracker Alpha |
-| Beta Debug | `io.github.spasarnaudov.portfoliotracker.beta.debug` | `…:5001/api/v1/` | Portfolio Tracker Beta |
-| Production Debug | `io.github.spasarnaudov.portfoliotracker.debug` | `…:5000/api/v1/` | Portfolio Tracker |
+| Alpha Debug | `io.github.spasarnaudov.trackertavex.alpha.debug` | `…:5002/api/v1/` | Tracker Tavex Alpha |
+| Beta Debug | `io.github.spasarnaudov.trackertavex.beta.debug` | `…:5001/api/v1/` | Tracker Tavex Beta |
+| Production Debug | `io.github.spasarnaudov.trackertavex.debug` | `…:5000/api/v1/` | Tracker Tavex |
 
 Each has a matching shared scheme (Xcode's scheme picker, next to the run/stop buttons) —
 pick one and Run to install that variant. Distinct bundle identifiers mean all three can
 be installed on the same simulator/device side by side, same as Android's per-flavor
-`applicationIdSuffix`. The original `PortfolioTracker` scheme/`Debug` configuration is
+`applicationIdSuffix`. The original `TrackerTavex` scheme/`Debug` configuration is
 unchanged and still points at production, kept as a plain default.
 
 `API_BASE_URL` is a build setting, threaded into the app via the `APIBaseURL` Info.plist
@@ -99,16 +99,16 @@ iOS, so each source image was center-cropped to that same 66.7%-of-canvas region
 scaling up to a flat 1024×1024 (`AppIcon-Alpha`/`AppIcon-Beta`/`AppIcon-Production` in
 `Assets.xcassets`) — otherwise the icon would show extra dark padding around it that
 Android's launcher mask normally hides. The plain `AppIcon` (no badge, used by the
-original `PortfolioTracker` scheme) is Android's unbadged default the same way. Source
+original `TrackerTavex` scheme) is Android's unbadged default the same way. Source
 art is 432×432, so these are upscaled — fine for on-device/simulator use, but swap in
 higher-resolution originals before an eventual App Store submission.
 
 ## Running the app
 
-1. Open `PortfolioTracker.xcodeproj` in Xcode.
+1. Open `TrackerTavex.xcodeproj` in Xcode.
 2. Confirm a Development Team is set under the target's **Signing & Capabilities**
    (Automatic signing).
-3. Pick a scheme (`PortfolioTracker`, or one of the three above) and a simulator or
+3. Pick a scheme (`TrackerTavex`, or one of the three above) and a simulator or
    device, then run.
 4. If the simulator/device isn't on the backend's Tailscale tailnet, open **Connection**
    on the Login screen and point it at a reachable address.
@@ -129,7 +129,7 @@ Material 3 template — the stock purple baseline scheme, not custom branding �
 - `MaterialComponents.swift` — `.materialFilled`/`.materialTonal` button styles,
   `.materialOutlined` text field style, and `.materialList()` (Material-colored list
   backgrounds/rows).
-- `PortfolioTrackerApp.swift` configures `UINavigationBarAppearance`/`UITabBarAppearance`
+- `TrackerTavexApp.swift` configures `UINavigationBarAppearance`/`UITabBarAppearance`
   at launch, since the system chrome (nav bars, tab bar) is controlled by UIKit
   appearance proxies, not SwiftUI view modifiers.
 

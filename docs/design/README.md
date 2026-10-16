@@ -1,7 +1,7 @@
 # Design Documentation — Android App
 
 This folder holds the instructions Claude Design follows when designing the
-Portfolio Tracker Android app's UI. It defines **process and constraints**, not
+Tracker Tavex Android app's UI. It defines **process and constraints**, not
 the design itself — the actual screens, colors, and components are produced by
 Claude Design during the workflow below and reviewed by the project owner.
 

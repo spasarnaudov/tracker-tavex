@@ -1,6 +1,6 @@
-# Portfolio Tracker — Android
+# Tracker Tavex — Android
 
-A native Android client for the Portfolio Tracker `/api/v1` REST API. `API.md` at
+A native Android client for the Tracker Tavex `/api/v1` REST API. `API.md` at
 the repository root is documented as the source of truth for every endpoint this
 app calls, but it does not currently exist in this checkout — see
 [Known limitations](#known-limitations) and

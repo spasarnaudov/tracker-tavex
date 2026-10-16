@@ -120,7 +120,7 @@ value.
 Use:
 
 ```swift
-Text("Portfolio Tracker")
+Text("Tracker Tavex")
     .font(MaterialFont.headlineSmall)
 ```
 

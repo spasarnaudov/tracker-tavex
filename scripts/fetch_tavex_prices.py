@@ -26,7 +26,7 @@ CATEGORY_BY_URL_PART = {
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "PortfolioTracker/1.0"
+    "TrackerTavex/1.0"
 )
 
 SKIPPED_LABELS = {

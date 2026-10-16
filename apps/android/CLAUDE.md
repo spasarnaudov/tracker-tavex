@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A native Android client (Kotlin, Jetpack Compose, Material 3) for a Portfolio Tracker
+A native Android client (Kotlin, Jetpack Compose, Material 3) for a Tracker Tavex
 `/api/v1` REST API. `API.md` at the repository root is documented as the source of
 truth for the API contract, but it does not currently exist in this checkout — treat
 any API-shape assumptions with the caution described in

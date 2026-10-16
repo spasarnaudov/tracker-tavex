@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines how Claude Design must work on the Portfolio Tracker
+This document defines how Claude Design must work on the Tracker Tavex
 Android app's UI. It applies only to the design phase described here — general
 AI-agent rules for this project (commit discipline, explaining changes,
 asking before broad changes) already exist in

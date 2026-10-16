@@ -13,7 +13,7 @@
     </queries>
 
     <application
-        android:name=".PortfolioTrackerApp"
+        android:name=".TrackerTavexApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,12 +22,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="false"
-        android:theme="@style/Theme.PortfolioTrackerAndroid">
+        android:theme="@style/Theme.TrackerTavexAndroid">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.PortfolioTrackerAndroid">
+            android:theme="@style/Theme.TrackerTavexAndroid">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

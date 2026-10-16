@@ -111,7 +111,7 @@ logs/database_backup.log
 Verify a dump file manually:
 
 ```bash
-./scripts/database/verify_backup.sh backups/database/portfolio_tracker_YYYY-MM-DD_HH-MM-SS.dump
+./scripts/database/verify_backup.sh backups/database/tracker_tavex_YYYY-MM-DD_HH-MM-SS.dump
 ```
 
 The verification script checks that:
@@ -127,7 +127,7 @@ Restore a backup (schema and data) into the database `DATABASE_URL` points
 at:
 
 ```bash
-./scripts/database/restore_database.sh backups/database/portfolio_tracker_YYYY-MM-DD_HH-MM-SS.dump
+./scripts/database/restore_database.sh backups/database/tracker_tavex_YYYY-MM-DD_HH-MM-SS.dump
 ```
 
 This drops and recreates the `public` schema and then restores the dump into

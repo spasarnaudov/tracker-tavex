@@ -1,4 +1,4 @@
-# AI Instructions - Portfolio Tracker
+# AI Instructions - Tracker Tavex
 
 ## Role
 
@@ -75,7 +75,7 @@ Avoid:
 
 ## Project Technologies
 
-Project: Portfolio Tracker
+Project: Tracker Tavex
 
 Technology stack:
 

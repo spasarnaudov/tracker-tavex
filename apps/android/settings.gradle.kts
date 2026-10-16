@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "portfolio-tracker-android"
+rootProject.name = "tracker-tavex-android"
 include(":app")
