@@ -9,12 +9,17 @@ import argparse
 import html
 import json
 import re
+import sys
+import time
+import urllib.error
 import urllib.request
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
 
 DEFAULT_URL = "https://tavex.bg/"
+# Tavex sometimes responds slowly. Wait this many seconds before each retry.
+FETCH_RETRY_DELAYS = [10, 30]
 DEFAULT_CATEGORY_URLS = [
     "https://tavex.bg/zlato/",
     "https://tavex.bg/srebro/",
@@ -217,14 +222,29 @@ def parse_products(page_html: str) -> list[dict[str, Any]]:
     return list(products_by_name.values())
 
 
+def is_retryable_fetch_error(error: Exception) -> bool:
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code >= 500
+
+    return isinstance(error, (TimeoutError, ConnectionError, urllib.error.URLError))
+
+
 def fetch_html(url: str, timeout: int) -> str:
     request = urllib.request.Request(
         url,
         headers={"User-Agent": USER_AGENT},
     )
 
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        return response.read().decode("utf-8", errors="replace")
+    for attempt, retry_delay in enumerate([*FETCH_RETRY_DELAYS, None], start=1):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return response.read().decode("utf-8", errors="replace")
+        except Exception as error:
+            if retry_delay is None or not is_retryable_fetch_error(error):
+                raise
+
+            print(f"Fetch attempt {attempt} for {url} failed: {error!r}. Retrying in {retry_delay}s.", file=sys.stderr)
+            time.sleep(retry_delay)
 
 
 def read_html_file(path: str) -> tuple[str, str]:

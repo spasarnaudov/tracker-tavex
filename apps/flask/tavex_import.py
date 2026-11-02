@@ -32,7 +32,7 @@ def current_hour_timestamp():
     return datetime.now().replace(minute=0, second=0, microsecond=0)
 
 
-def import_tavex_prices(price_time=None, timeout=15):
+def import_tavex_prices(price_time=None, timeout=30):
     products, sources = fetch_products_from_urls(DEFAULT_CATEGORY_URLS, timeout=timeout)
     buyback_products = gold_buyback_prices_to_products(
         get_tavex_gold_buyback_prices(timeout=timeout),
@@ -109,7 +109,7 @@ def parse_tavex_gold_buyback_prices(page_html):
     return sorted(prices, key=lambda price: price["karat"])
 
 
-def get_tavex_gold_buyback_prices(timeout=15):
+def get_tavex_gold_buyback_prices(timeout=30):
     page_html = fetch_html(TAVEX_BUYBACK_URL, timeout)
     return parse_tavex_gold_buyback_prices(page_html)
 
