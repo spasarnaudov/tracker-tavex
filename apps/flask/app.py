@@ -291,6 +291,34 @@ def format_chart_label(value, interval):
     return value
 
 
+# Expected time between two neighbouring chart points. Prices are imported
+# hourly, so "recorded" points are expected one hour apart.
+CHART_INTERVAL_STEPS = {
+    "recorded": timedelta(hours=1),
+    "hourly": timedelta(hours=1),
+    "daily": timedelta(days=1),
+    "weekly": timedelta(weeks=1),
+    "monthly": timedelta(days=31),
+}
+CHART_GAP_FACTOR = 1.5
+
+
+def get_chart_gaps(price_dates, interval):
+    """Return one flag per point: True when data is missing before that point."""
+    step = CHART_INTERVAL_STEPS.get(interval, timedelta(hours=1))
+    max_distance = step * CHART_GAP_FACTOR
+    gaps = []
+
+    for index, price_date in enumerate(price_dates):
+        if index == 0:
+            gaps.append(False)
+            continue
+
+        gaps.append(price_date - price_dates[index - 1] > max_distance)
+
+    return gaps
+
+
 def get_chart_list_value(values, index, default=None):
     if index >= len(values):
         return default
@@ -660,6 +688,10 @@ def get_portfolio_chart_data(user_id, portfolio_range, portfolio_interval):
             float(price["profit_percent"]) if price["profit_percent"] is not None else None
             for price in portfolio_history
         ],
+        "chart_gaps": get_chart_gaps(
+            [price["price_date"] for price in portfolio_history],
+            portfolio_interval,
+        ),
     }
 
 
@@ -806,6 +838,7 @@ def portfolio():
         chart_values=chart_data["chart_values"],
         chart_profits=chart_data["chart_profits"],
         chart_profit_percents=chart_data["chart_profit_percents"],
+        chart_gaps=chart_data["chart_gaps"],
     )
 
 
@@ -965,6 +998,10 @@ def charts():
                 for price in prices
             ],
             "values": [float(price["price"]) for price in prices],
+            "gaps": get_chart_gaps(
+                [price["price_date"] for price in prices],
+                chart_config["interval"],
+            ),
             "has_prices": bool(prices),
         })
 
