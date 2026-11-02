@@ -60,7 +60,7 @@ def get_int_env(name, default):
 
 def get_default_session_cookie_name():
     project_hash = hashlib.sha256(str(PROJECT_ROOT).encode()).hexdigest()[:12]
-    return f"portfolio_tracker_{project_hash}_session"
+    return f"tracker_tavex_{project_hash}_session"
 
 
 def get_database_config():

@@ -9,12 +9,17 @@ import argparse
 import html
 import json
 import re
+import sys
+import time
+import urllib.error
 import urllib.request
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
 
 DEFAULT_URL = "https://tavex.bg/"
+# Tavex sometimes responds slowly. Wait this many seconds before each retry.
+FETCH_RETRY_DELAYS = [10, 30]
 DEFAULT_CATEGORY_URLS = [
     "https://tavex.bg/zlato/",
     "https://tavex.bg/srebro/",
@@ -26,7 +31,7 @@ CATEGORY_BY_URL_PART = {
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "PortfolioTracker/1.0"
+    "TrackerTavex/1.0"
 )
 
 SKIPPED_LABELS = {
@@ -115,8 +120,12 @@ def price_from_pricelist(pricelist: dict[str, Any], price_type: str) -> str | No
 
 def parse_structured_products(page_html: str) -> list[dict[str, Any]]:
     products_by_name: dict[str, dict[str, Any]] = {}
+    # A block also ends where the next product card starts. Megamenu cards
+    # (currencies, gift boxes) have no price list of their own, and without
+    # this boundary the last one picked up the next card's price.
     product_blocks = re.findall(
-        r'<div class="product__meta">(?P<block>.*?)(?=<div class="product__meta">|</body>)',
+        r'<div class="product__meta">(?P<block>.*?)'
+        r'(?=<div class="product__meta">|<div class="product\b[^"]*\bjs-product\b|</body>)',
         page_html,
         flags=re.DOTALL,
     )
@@ -217,14 +226,29 @@ def parse_products(page_html: str) -> list[dict[str, Any]]:
     return list(products_by_name.values())
 
 
+def is_retryable_fetch_error(error: Exception) -> bool:
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code >= 500
+
+    return isinstance(error, (TimeoutError, ConnectionError, urllib.error.URLError))
+
+
 def fetch_html(url: str, timeout: int) -> str:
     request = urllib.request.Request(
         url,
         headers={"User-Agent": USER_AGENT},
     )
 
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        return response.read().decode("utf-8", errors="replace")
+    for attempt, retry_delay in enumerate([*FETCH_RETRY_DELAYS, None], start=1):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return response.read().decode("utf-8", errors="replace")
+        except Exception as error:
+            if retry_delay is None or not is_retryable_fetch_error(error):
+                raise
+
+            print(f"Fetch attempt {attempt} for {url} failed: {error!r}. Retrying in {retry_delay}s.", file=sys.stderr)
+            time.sleep(retry_delay)
 
 
 def read_html_file(path: str) -> tuple[str, str]:

@@ -1,6 +1,6 @@
-# Portfolio Tracker
+# Tracker Tavex
 
-Portfolio Tracker is a personal project for tracking investment assets and their historical prices.
+Tracker Tavex is a personal project for tracking investment assets and their historical prices.
 
 ## Goals
 
@@ -20,15 +20,13 @@ Portfolio Tracker is a personal project for tracking investment assets and their
 ## Project Structure
 
 ```text
-portfolio-tracker/
+tracker-tavex/
 ├── apps/
-│   ├── flask/
-│   │   ├── app.py
-│   │   ├── repository.py
-│   │   ├── static/
-│   │   └── templates/
-│   ├── android/            # native Android client — see apps/android/README.md
-│   └── ios/                # native iOS client — see apps/ios/README.md
+│   └── flask/
+│       ├── app.py
+│       ├── repository.py
+│       ├── static/
+│       └── templates/
 ├── database/
 │   └── postgresql/
 │       ├── maintenance/
@@ -46,8 +44,6 @@ portfolio-tracker/
 - [docs/database-operations.md](docs/database-operations.md) — database setup, backups, restore, maintenance.
 - [docs/git-branch-strategy.md](docs/git-branch-strategy.md) — branch naming, workflow, and push policy.
 - [scripts/README.md](scripts/README.md) — environment setup and day-to-day operation (app process, cron, price imports).
-- [apps/android/README.md](apps/android/README.md) — the native Android client.
-- [apps/ios/README.md](apps/ios/README.md) — the native iOS client.
 
 ## Current Version
 

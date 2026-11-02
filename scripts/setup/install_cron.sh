@@ -26,7 +26,7 @@ prune_stale_lines() {
     done
 
     filtered="$(printf '%s
-' "$filtered" | grep -v 'portfolio-tracker-beta' || true)"
+' "$filtered" | grep -v 'tracker-tavex-beta' || true)"
 
     if [[ "$filtered" != "$existing" ]]; then
         crontab - <<< "$filtered"

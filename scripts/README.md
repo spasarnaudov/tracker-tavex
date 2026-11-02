@@ -4,7 +4,7 @@ Every script derives its own project root from its location on disk (nothing
 is hardcoded to a specific path or directory name), so cloning this repo
 into any directory works without editing any script, and running several
 independent checkouts side by side on the same machine (e.g.
-`portfolio-tracker`, `portfolio-tracker-alpha`, `portfolio-tracker-beta`) is
+`tracker-tavex`, `tracker-tavex-alpha`, `tracker-tavex-beta`) is
 fully supported — each checkout only ever touches its own `.env`,
 `runtime/`, `logs/`, `backups/`, and its own crontab lines.
 
@@ -113,14 +113,14 @@ Safe to run more than once — it checks each line before adding, so nothing
 is ever duplicated, and it never touches another checkout's crontab lines
 (every line is built from this script's own project directory). It installs
 exactly these four lines (paths shown here for a checkout at
-`/home/spas/Projects/portfolio-tracker`; adjust automatically to wherever
+`/home/spas/Projects/tracker-tavex`; adjust automatically to wherever
 you actually cloned it):
 
 ```cron
-@reboot cd /home/spas/Projects/portfolio-tracker && ./scripts/start_app.sh >> /home/spas/Projects/portfolio-tracker/logs/app.log 2>&1
-0 * * * * cd /home/spas/Projects/portfolio-tracker && apps/flask/.venv/bin/python scripts/import_tavex_prices.py >> /home/spas/Projects/portfolio-tracker/logs/tavex_import.log 2>&1
-0 3 * * * cd /home/spas/Projects/portfolio-tracker && ./scripts/database/backup_database.sh >> /home/spas/Projects/portfolio-tracker/logs/database_backup.log 2>&1
-0 3 * * * cd /home/spas/Projects/portfolio-tracker && ./scripts/backup_env.sh >> /home/spas/Projects/portfolio-tracker/logs/env_backup.log 2>&1
+@reboot cd /home/spas/Projects/tracker-tavex && ./scripts/start_app.sh >> /home/spas/Projects/tracker-tavex/logs/app.log 2>&1
+0 * * * * cd /home/spas/Projects/tracker-tavex && apps/flask/.venv/bin/python scripts/import_tavex_prices.py >> /home/spas/Projects/tracker-tavex/logs/tavex_import.log 2>&1
+0 3 * * * cd /home/spas/Projects/tracker-tavex && ./scripts/database/backup_database.sh >> /home/spas/Projects/tracker-tavex/logs/database_backup.log 2>&1
+0 3 * * * cd /home/spas/Projects/tracker-tavex && ./scripts/backup_env.sh >> /home/spas/Projects/tracker-tavex/logs/env_backup.log 2>&1
 ```
 
 Prefer editing the crontab by hand? Run `crontab -e` and add the lines

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Portfolio - Portfolio Tracker{% endblock %}
+{% block title %}Portfolio - Tracker Tavex{% endblock %}
 
 {% block content %}
     <form id="portfolioChartFilters" method="get" action="/portfolio"></form>
@@ -38,6 +38,7 @@
             height="360"
             data-labels='{{ chart_labels | tojson }}'
             data-values='{{ chart_values | tojson }}'
+            data-gaps='{{ chart_gaps | tojson }}'
             data-profits='{{ chart_profits | tojson }}'
             data-profit-percents='{{ chart_profit_percents | tojson }}'
             data-interval="{{ portfolio_interval }}"
@@ -359,7 +360,8 @@
                         chartData.chart_values,
                         chartData.portfolio_interval,
                         chartData.chart_profits,
-                        chartData.chart_profit_percents
+                        chartData.chart_profit_percents,
+                        chartData.chart_gaps
                     );
                 } catch (error) {
                     console.error(error);

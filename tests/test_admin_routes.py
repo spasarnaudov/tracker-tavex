@@ -377,6 +377,23 @@ class AdminRouteTests(unittest.TestCase):
 
         self.assertEqual(chart_data["chart_profit_percents"], [None])
 
+    def test_chart_gaps_mark_points_after_missing_data(self):
+        price_dates = [
+            datetime(2026, 7, 13, 9, 0),
+            datetime(2026, 7, 13, 10, 0),
+            datetime(2026, 7, 13, 15, 0),
+            datetime(2026, 7, 13, 16, 0),
+        ]
+
+        self.assertEqual(
+            application.get_chart_gaps(price_dates, "hourly"),
+            [False, False, True, False],
+        )
+        self.assertEqual(
+            application.get_chart_gaps(price_dates, "daily"),
+            [False, False, False, False],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

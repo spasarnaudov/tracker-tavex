@@ -21,7 +21,7 @@ should_continue_with_environment_setup() {
     return 0
 }
 
-# One-time machine setup for a new Portfolio Tracker server host. Written for
+# One-time machine setup for a new Tracker Tavex server host. Written for
 # macOS on Apple Silicon (Homebrew + Docker Desktop) — the alpha/beta/production
 # checkouts all share this machine's single PostgreSQL container, per
 # scripts/README.md and docs/database-operations.md.
@@ -40,7 +40,7 @@ if [[ ! -t 0 || ! -t 1 ]]; then
     exit 1
 fi
 
-echo "=== Portfolio Tracker server setup ==="
+echo "=== Tracker Tavex server setup ==="
 echo
 
 if [[ "$(uname -s)" != "Darwin" ]]; then
@@ -173,8 +173,7 @@ if ! "$TAILSCALE_BIN" status &>/dev/null; then
     exit 1
 fi
 echo "Tailscale is connected."
-echo "MagicDNS name for this machine (needed for the Android/iOS clients'"
-echo "API_BASE_URL, see apps/android/docs/BUILD_VARIANTS.md):"
+echo "MagicDNS name for this machine:"
 "$TAILSCALE_BIN" status --self 2>/dev/null | head -1
 echo
 

@@ -59,6 +59,7 @@
                     height="360"
                     data-labels='{{ chart_panel["labels"] | tojson }}'
                     data-values='{{ chart_panel["values"] | tojson }}'
+                    data-gaps='{{ chart_panel["gaps"] | tojson }}'
                     data-interval="{{ chart_panel.interval }}"
                 ></canvas>
                 <p class="chart-info">Click on the chart to inspect a point.</p>
