@@ -120,8 +120,12 @@ def price_from_pricelist(pricelist: dict[str, Any], price_type: str) -> str | No
 
 def parse_structured_products(page_html: str) -> list[dict[str, Any]]:
     products_by_name: dict[str, dict[str, Any]] = {}
+    # A block also ends where the next product card starts. Megamenu cards
+    # (currencies, gift boxes) have no price list of their own, and without
+    # this boundary the last one picked up the next card's price.
     product_blocks = re.findall(
-        r'<div class="product__meta">(?P<block>.*?)(?=<div class="product__meta">|</body>)',
+        r'<div class="product__meta">(?P<block>.*?)'
+        r'(?=<div class="product__meta">|<div class="product\b[^"]*\bjs-product\b|</body>)',
         page_html,
         flags=re.DOTALL,
     )

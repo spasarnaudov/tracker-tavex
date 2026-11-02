@@ -125,5 +125,19 @@ class FetchHtmlRetryTests(unittest.TestCase):
         sleep.assert_not_called()
 
 
+class ParseStructuredProductsTests(unittest.TestCase):
+    def test_card_without_price_list_does_not_take_next_cards_price(self):
+        page_html = """
+            <div class="product product--listing js-product" data-id="USD">
+                <div class="product__meta"><span class="product__title-inner">Щатски долар</span></div>
+            </div>
+            <div class="product product--featured js-product" data-id="1">
+                <div data-pricelist='{"buy": [{"price": 100}], "sell": [{"price": 110}]}'></div>
+            </div>
+        </body>"""
+
+        self.assertEqual(fetch_tavex_prices.parse_structured_products(page_html), [])
+
+
 if __name__ == "__main__":
     unittest.main()
